@@ -2,6 +2,7 @@
 using namespace std;
 
 const long MOD = 998244353;
+vector<int> f;
 
 long power(long a, long b) {
   long res = 1, t = 1;
@@ -15,6 +16,8 @@ long power(long a, long b) {
 
 long mi(long n) { return power(n, MOD - 2); }
 
+long comb_c(long n, long r) { return f[n] * mi(f[n - r]) % MOD * mi(f[r]) % MOD; }
+long comb_h(long n, long r) { return comb_c(n + r - 1, r); }
 
 /*
 // 분할 정복을 이용한 거듭제곱 (a^b % mod)

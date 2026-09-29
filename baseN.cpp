@@ -9,12 +9,9 @@ char C(long t, long B) {
   return t % B + (t % B > 9 ? t % B > 35 ? 'a' - 36 : 'A' - 10 : '0');
 }
 
-int main() {
-  cin.tie(0)->sync_with_stdio(0);
-  long T, A, B, x, c, t;
-  string S, r = "0";
-  cin >> T;
-  cin >> A >> B >> S;
+string baseN(string &S, long A, long B) {
+  long x, c, t;
+  string r = "0";
   for (auto &e : S) {
     c = x = L(e);
     for (long i = 0; i < r.size(); ++i) {
@@ -22,11 +19,19 @@ int main() {
       r[i] = C(t, B);
       c = t / B;
     }
-    while (c) {
+    while(c) {
       r.push_back(C(c, B));
       c /= B;
     }
   }
   reverse(r.begin(), r.end());
-  cout << r;
+  return r;
+}
+
+int main() {
+  cin.tie(0)->sync_with_stdio(0);
+  long A, B;
+  string S;
+  cin >> A >> B >> S;
+  cout << baseN(S, A, B);
 }

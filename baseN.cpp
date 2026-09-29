@@ -1,25 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long L(char t) {
+long C2L(char t) {
   return t - (t >= 'A' ? t >= 'a' ? 'a' - 36 : 'A' - 10 : '0');
 }
 
-char C(long t, long B) {
+char L2C(long t, long B) {
   return t % B + (t % B > 9 ? t % B > 35 ? 'a' - 36 : 'A' - 10 : '0');
 }
 
 string baseN(string &S, long A, long B) {
   string r = "0";
   for (auto &e : S) {
-    long c = L(e), t;
+    long c = C2L(e), t;
     for (long i = 0; i < r.size(); ++i) {
-      t = L(r[i]) * A + c;
-      r[i] = C(t, B);
+      t = C2L(r[i]) * A + c;
+      r[i] = L2C(t, B);
       c = t / B;
     }
     while(c) {
-      r.push_back(C(c, B));
+      r.push_back(L2C(c, B));
       c /= B;
     }
   }

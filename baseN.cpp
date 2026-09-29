@@ -10,10 +10,10 @@ char C(long t, long B) {
 }
 
 string baseN(string &S, long A, long B) {
-  long x, c, t;
+  long c, t;
   string r = "0";
   for (auto &e : S) {
-    c = x = L(e);
+    c = L(e);
     for (long i = 0; i < r.size(); ++i) {
       t = L(r[i]) * A + c;
       r[i] = C(t, B);

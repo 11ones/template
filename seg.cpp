@@ -10,7 +10,7 @@ ar d = {(ll)1e9, -1};
 // Build
 void B(ll p, ll s, ll e) {
   if (s == e) {
-    sg[p] = {v[s], v[s]};
+    sg[p] = init(s);
     return;
   }
   ll x = p << 1;
@@ -18,7 +18,7 @@ void B(ll p, ll s, ll e) {
   B(x | 1, (s + e) / 2 + 1, e);
   ar l = sg[x];
   ar r = sg[x ^ 1];
-  sg[p] = {min(l[0], r[0]), max(l[1], r[1])};
+  sg[p] = merge(l, r);
 }
 
 // Find
@@ -27,14 +27,14 @@ ar F(ll p, ll x, ll y, ll s, ll e) {
   if (x <= s && e <= y) return sg[p];
   ar l = F(p << 1, x, y, s, (s + e) / 2);
   ar r = F(p << 1 | 1, x, y, (s + e) / 2 + 1, e);
-  return {min(l[0], r[0]), max(l[1], r[1])};
+  return merge(l, r);
 }
 
 // Update
 void U(ll p, ll x, ll s, ll e) {
   if (x < s || e < x) return;
   if (s == e) {
-    sg[p] = {v[s], v[s]};
+    sg[p] = init(s);
     return;
   }
   if (x <= s && e <= x) return;
@@ -42,7 +42,15 @@ void U(ll p, ll x, ll s, ll e) {
   U(p << 1 ^ 1, x, (s + e) / 2 + 1, e);
   ar l = sg[p << 1];
   ar r = sg[p << 1 ^ 1];
-  sg[p] = {min(l[0], r[0]), max(l[1], r[1])};
+  sg[p] = merge(l, r);
+}
+
+ar merge(ar l, ar r) {
+  return {min(l[0], r[0]), max(l[1], r[1])};
+}
+
+ar init(ll x) {
+  return {v[x], v[x]};
 }
 
 int main() {

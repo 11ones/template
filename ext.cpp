@@ -22,6 +22,6 @@ int main() {
   TR tr;
   tr.insert(2);
   tr.find_by_order(1); // 0based index -> iterator
-  tr.order_of_key(2); // value -> index
+  tr.order_of_key(2); // value -> number of smaller elements
   tr.erase(tr.find_by_order(tr.order_of_key(2)));
 }

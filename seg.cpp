@@ -7,6 +7,14 @@ vector<ar> sg;
 vector<ll> v;
 ar d = {(ll)1e9, -1};
 
+ar merge(ar l, ar r) {
+  return {min(l[0], r[0]), max(l[1], r[1])};
+}
+
+ar init(ll x) {
+  return {v[x], v[x]};
+}
+
 // Build
 void B(ll p, ll s, ll e) {
   if (s == e) {
@@ -43,14 +51,6 @@ void U(ll p, ll x, ll s, ll e) {
   ar l = sg[p << 1];
   ar r = sg[p << 1 ^ 1];
   sg[p] = merge(l, r);
-}
-
-ar merge(ar l, ar r) {
-  return {min(l[0], r[0]), max(l[1], r[1])};
-}
-
-ar init(ll x) {
-  return {v[x], v[x]};
 }
 
 int main() {

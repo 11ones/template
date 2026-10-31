@@ -2,7 +2,6 @@
 using namespace std;
 using L = long long;
 
-
 L power(L a, L b, L x) {
   L res = 1, t = 1;
   a %= x;
